@@ -2,41 +2,62 @@ const dicomElementRegistry = require("./dicomElementRegistry.json");
 const fs = require("fs");
 
 const main = () => {
-  try {
-    fs.unlinkSync("types/DicomKeywords.ts");
-    fs.unlinkSync("types/DicomTag.ts");
+  const writeFile = (path, lines) => {
+    if (fs.existsSync(path)) {
+      fs.unlinkSync(path);
+    }
 
-    let stream = fs.createWriteStream("types/DicomTag.ts", { flags: "w"} );
+    let stream = fs.createWriteStream(path, { flags: "w" });
 
     stream.on("finish", function () {
-      console.log("Finished writing types/DicomTag.ts");
+      console.log(`Finished writing '${path}'`);
     });
 
     stream.on("error", function (err) {
       console.log(err);
     });
 
+    lines.forEach(function (line) {
+      stream.write(line);
+    });
+
+    stream.end();
+  }
+
+  try {
     const keywordLines = [];
     const tagLines = [];
 
-    stream.write("/******************************\n");
-    stream.write(" * Generated File: Do not edit\n");
-    stream.write(" *****************************/\n");
-    stream.write("export type DicomTag = \n");
+    keywordLines.push("/******************************\n");
+    keywordLines.push(" * Generated File: Do not edit\n");
+    keywordLines.push(" *****************************/\n");
+    keywordLines.push("export type DicomKeyword = \n");
+
+    tagLines.push("/******************************\n");
+    tagLines.push(" * Generated File: Do not edit\n");
+    tagLines.push(" *****************************/\n");
+    tagLines.push("export type DicomTag = \n");
 
     dicomElementRegistry.forEach((element, index) => {
-      stream.write(`  // ${element.displayName} / ${element.keyword} / ${element.vr}\n`);
-      stream.write(`  "${element.tag}"`);
+      keywordLines.push(`  // ${element.displayName} / ${element.tag} / ${element.vr}\n`);
+      keywordLines.push(`  "${element.keyword}"`);
+      tagLines.push(`  // ${element.displayName} / ${element.keyword} / ${element.vr}\n`);
+      tagLines.push(`  "${element.tag}"`);
 
       if (index < dicomElementRegistry.length - 1) {
-        stream.write(` |`);
+        keywordLines.push(" |");
+        tagLines.push(" |");
       }
 
-      stream.write(`\n`);
+      keywordLines.push("\n");
+      tagLines.push("\n");
     });
 
-    stream.write(`;\n`);
-    stream.end();
+    keywordLines.push("\n");
+    tagLines.push("\n");
+
+    writeFile("src/types/DicomKeyword.ts", keywordLines);
+    writeFile("src/types/DicomTag.ts", tagLines);
   }
   catch (e) {
     console.log(e);

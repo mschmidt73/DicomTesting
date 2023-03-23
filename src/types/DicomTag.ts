@@ -10128,4 +10128,4 @@ export type DicomTag =
   "FFFEE0DD" |
   // Current Frame Functional Groups Sequence / CurrentFrameFunctionalGroupsSequence / SQ
   "00060001"
-;
+
