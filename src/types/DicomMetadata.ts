@@ -1,4 +1,4 @@
-import { DicomTag } from "./";
+import { DicomKeyword, DicomTag, DicomTagDefinition } from "./";
 
 /*
  * https://dicom.nema.org/medical/Dicom/2017c/output/chtml/part05/sect_6.2.html
@@ -20,6 +20,7 @@ export type DicomValueRepresentation =
   "OD" |  // Other Double
   "OF" |  // Other Float
   "OL" |  // Other Long
+  "OV" |
   "OW" |  // Other Word
   "PN" |  // Person Name
   "SH" |  // Short String
@@ -27,6 +28,7 @@ export type DicomValueRepresentation =
   "SQ" |  // Sequence of Itens
   "SS" |  // Signed Short
   "ST" |  // Short Text
+  "SV" |
   "TM" |  // Time
   "UC" |  // Unlimited Characters
   "UI" |  // Unique Identifier
@@ -34,18 +36,9 @@ export type DicomValueRepresentation =
   "UN" |  // Unknown
   "UR" |  // Universal Resource Identifier / Locator (URI/URL)
   "US" |  // Unsigned Short
-  "UT"    // Unlimited Text
+  "UT" |  // Unlimited Text
+  "UV"
 ;
-
-export interface DicomTagDefinition {
-  displayName: string;
-  element: string;
-  group: string;
-  keyword: string;
-  tag: DicomTag;
-  vr: DicomValueRepresentation;
-  vm: string;
-}
 
 export interface DicomValue {
   vr: DicomValueRepresentation
