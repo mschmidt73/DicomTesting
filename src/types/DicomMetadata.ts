@@ -16,11 +16,12 @@ export type DicomValueRepresentation =
   "IS" |  // Integer String
   "LO" |  // Long String
   "LT" |  // Lont Text
+  "NA" |
   "OB" |  // Other Byte
   "OD" |  // Other Double
   "OF" |  // Other Float
   "OL" |  // Other Long
-  "OV" |
+  // "OV" |
   "OW" |  // Other Word
   "PN" |  // Person Name
   "SH" |  // Short String
@@ -28,7 +29,7 @@ export type DicomValueRepresentation =
   "SQ" |  // Sequence of Itens
   "SS" |  // Signed Short
   "ST" |  // Short Text
-  "SV" |
+  // "SV" |
   "TM" |  // Time
   "UC" |  // Unlimited Characters
   "UI" |  // Unique Identifier

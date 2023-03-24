@@ -6918,10 +6918,6 @@ export type DicomKeyword =
   "SelectorUIValue" |
   // Selector Code Sequence Value / 00720080 / SQ
   "SelectorCodeSequenceValue" |
-  // Selector OV Value / 00720081 / OV
-  "SelectorOVValue" |
-  // Selector SV Value / 00720082 / SV
-  "SelectorSVValue" |
   // Selector UV Value / 00720083 / UV
   "SelectorUVValue" |
   // Number of Screens / 00720100 / US
@@ -10088,10 +10084,6 @@ export type DicomKeyword =
   "OverlayData" |
   // Overlay Comments / 60xx4000 / LT
   "OverlayComments" |
-  // Extended Offset Table / 7FE00001 / OV
-  "ExtendedOffsetTable" |
-  // Extended Offset Table Lengths / 7FE00002 / OV
-  "ExtendedOffsetTableLengths" |
   // Encapsulated Pixel Data Value Total Length / 7FE00003 / UV
   "EncapsulatedPixelDataValueTotalLength" |
   // Float Pixel Data / 7FE00008 / OF

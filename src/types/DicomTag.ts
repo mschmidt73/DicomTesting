@@ -6918,10 +6918,6 @@ export type DicomTag =
   "0072007F" |
   // Selector Code Sequence Value / SelectorCodeSequenceValue / SQ
   "00720080" |
-  // Selector OV Value / SelectorOVValue / OV
-  "00720081" |
-  // Selector SV Value / SelectorSVValue / SV
-  "00720082" |
   // Selector UV Value / SelectorUVValue / UV
   "00720083" |
   // Number of Screens / NumberOfScreens / US
@@ -10088,10 +10084,6 @@ export type DicomTag =
   "60xx3000" |
   // Overlay Comments / OverlayComments / LT
   "60xx4000" |
-  // Extended Offset Table / ExtendedOffsetTable / OV
-  "7FE00001" |
-  // Extended Offset Table Lengths / ExtendedOffsetTableLengths / OV
-  "7FE00002" |
   // Encapsulated Pixel Data Value Total Length / EncapsulatedPixelDataValueTotalLength / UV
   "7FE00003" |
   // Float Pixel Data / FloatPixelData / OF

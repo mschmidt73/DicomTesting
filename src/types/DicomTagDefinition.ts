@@ -6,6 +6,6 @@ export interface DicomTagDefinition {
     group: string;
     keyword: DicomKeyword;
     tag: DicomTag;
-    vr: DicomValueRepresentation;
+    vr: DicomValueRepresentation | DicomValueRepresentation[];
     vm: string;
 }

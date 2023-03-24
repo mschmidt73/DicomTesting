@@ -1,9 +1,32 @@
 const dicomElementRegistry = require("./dicomElementRegistry.json");
 const fs = require("fs");
 
+const exclude = [ "ExtendedOffsetTable", "ExtendedOffsetTableLengths", "SelectorOVValue", "SelectorSVValue" ]
+
 const main = () => {
+  const parseValueRepresentation = (vr) => {
+    if (vr === undefined || vr === "") {
+      return "NA";
+    }
+    else if (vr.includes("/")) {
+      return vr.split("/");
+    }
+
+    return vr;
+  }
+
   const toDicomTagDefinition = (element) => {
-    return element;
+    const tagDefinition = {
+      displayName: element.displayName,
+      element: element.element,
+      group: element.group,
+      keyword: element.keyword,
+      tag: element.tag,
+      vr: parseValueRepresentation(element.vr),
+      vm: element.vm
+    };
+
+    return tagDefinition;
   }
 
   const writeFile = (path, lines) => {
@@ -57,6 +80,10 @@ const main = () => {
     tagsLines.push("export const DicomTags: Record<DicomTag, DicomTagDefinition> = {\n");
 
     dicomElementRegistry.forEach((element, index) => {
+      if (exclude.includes(element.keyword)) {
+        return;
+      }
+
       const definition = toDicomTagDefinition(element);
       const json = JSON.stringify(definition);
 
